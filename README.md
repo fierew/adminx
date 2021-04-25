@@ -1,7 +1,4 @@
-# adminx
-多模块后台管理系统服务端
-
-# Spring Boot 计量鉴定后台服务
+# adminx Spring Boot 多模块后台管理系统服务端
 
 ## 入门
 
