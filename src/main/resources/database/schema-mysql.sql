@@ -1,4 +1,4 @@
-CREATE TABLE `user` (
+CREATE TABLE IF NOT EXISTS `user` (
     `id` int NOT NULL AUTO_INCREMENT COMMENT '用户ID',
     `role_id` int NOT NULL DEFAULT '0' COMMENT '角色ID',
     `dept_id` int NOT NULL DEFAULT '0' COMMENT '部门ID',
@@ -28,6 +28,5 @@ CREATE TABLE `user` (
     `create_time` int NOT NULL DEFAULT '0' COMMENT '创建时间戳',
     `update_time` int NOT NULL DEFAULT '0' COMMENT '更新时间戳',
     PRIMARY KEY (`id`),
-    KEY `user_id_index` (`user_id`),
     KEY `machine_code_index` (`machine_code`)
 ) ENGINE=InnoDB AUTO_INCREMENT=64750 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='称重记录表';

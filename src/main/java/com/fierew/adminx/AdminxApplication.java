@@ -2,6 +2,7 @@ package com.fierew.adminx;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.context.ApplicationPidFileWriter;
 
 /**
  * @author xuyang
@@ -10,7 +11,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class AdminxApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AdminxApplication.class, args);
+		SpringApplication application = new SpringApplication(AdminxApplication.class);
+		application.addListeners(new ApplicationPidFileWriter());
+		application.run(args);
 	}
 
 }
