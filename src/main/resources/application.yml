@@ -47,6 +47,7 @@ spring:
     # redis 的密码
     password:
     # redis 配置连接池信息
+    database: 0
     lettuce:
       pool:
         # 连接池中的最大空闲连接 默认8

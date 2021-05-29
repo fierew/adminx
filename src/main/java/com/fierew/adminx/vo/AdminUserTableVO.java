@@ -1,5 +1,6 @@
 package com.fierew.adminx.vo;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.Data;
 
 /**
@@ -7,4 +8,6 @@ import lombok.Data;
  */
 @Data
 public class AdminUserTableVO {
+    private String user;
+    private String nameName;
 }

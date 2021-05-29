@@ -140,8 +140,7 @@ public class FastJsonUtils {
      */
     public static Object beanToJson(Object keyvalue) {
         String textJson = JSON.toJSONString(keyvalue);
-        Object objectJson = JSON.parse(textJson);
-        return objectJson;
+        return JSON.parse(textJson);
     }
 
     /**
@@ -151,8 +150,7 @@ public class FastJsonUtils {
      * @return
      */
     public static Object textToJson(String json) {
-        Object objectJson = JSON.parse(json);
-        return objectJson;
+        return JSON.parse(json);
     }
 
     /**
@@ -172,7 +170,7 @@ public class FastJsonUtils {
      * @param dateFormat
      * @return
      */
-    public static String toJSONStringWithDateFormat(Object object, String dateFormat) {
+    public static String toJsonStringWithDateFormat(Object object, String dateFormat) {
 
         return JSON.toJSONStringWithDateFormat(object, dateFormat);
     }
@@ -183,7 +181,7 @@ public class FastJsonUtils {
      * @param object
      * @return
      */
-    public static String toJSONStringWithDefaultDateFormat(Object object) {
+    public static String toJsonStringWithDefaultDateFormat(Object object) {
 
         return JSON.toJSONStringWithDateFormat(object, DEFAULT_DATE_FORMAT);
     }

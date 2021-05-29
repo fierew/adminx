@@ -24,16 +24,13 @@ public class RedisUtils {
     }
 
     /**
-     * 指定缓存失效时间
      *
      * @param key  键
      * @param time 时间(秒)
-     * @return
      */
-    public boolean expire(String key, long time) {
+    public void expire(String key, long time) {
         if (time > 0) {
             redisTemplate.expire(key, time, TimeUnit.SECONDS);
-            return true;
         } else {
             throw new RuntimeException("超时时间小于0");
         }
@@ -56,7 +53,7 @@ public class RedisUtils {
      * @return true 存在 false不存在
      */
     public boolean hasKey(String key) {
-        return redisTemplate.hasKey(key);
+        return Boolean.TRUE.equals(redisTemplate.hasKey(key));
     }
 
     /**
@@ -92,11 +89,9 @@ public class RedisUtils {
      *
      * @param key   键
      * @param value 值
-     * @return true成功 false失败
      */
-    public boolean set(String key, Object value) {
+    public void set(String key, Object value) {
         redisTemplate.opsForValue().set(key, value);
-        return true;
     }
 
 
@@ -292,7 +287,7 @@ public class RedisUtils {
      * @return true 存在 false不存在
      */
     public boolean sHasKey(String key, Object value) {
-        return redisTemplate.opsForSet().isMember(key, value);
+        return Boolean.TRUE.equals(redisTemplate.opsForSet().isMember(key, value));
     }
 
     /**
