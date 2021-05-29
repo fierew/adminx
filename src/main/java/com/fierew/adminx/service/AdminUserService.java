@@ -1,6 +1,6 @@
 package com.fierew.adminx.service;
 
-import com.fierew.adminx.dto.UserDTO;
+import com.fierew.adminx.dto.AdminUserDTO;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -8,7 +8,7 @@ import java.util.concurrent.ExecutionException;
 /**
  * @author xuyang
  */
-public interface UserService {
+public interface AdminUserService {
     /**
      * 获取分页数据
      *
@@ -18,5 +18,5 @@ public interface UserService {
      * @throws InterruptedException
      * @throws ExecutionException
      */
-    List<UserDTO> getList(Integer page, Integer pageSize) throws InterruptedException, ExecutionException;
+    List<AdminUserDTO> getList(Integer page, Integer pageSize) throws InterruptedException, ExecutionException;
 }

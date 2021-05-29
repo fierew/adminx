@@ -3,20 +3,30 @@ package com.fierew.adminx.domain;
 import lombok.Data;
 
 /**
- * 角色与部门关联关系实体类
+ * 角色实体类
  * @author xuyang
  */
 @Data
-public class RoleDeptDO {
+public class AdminRoleDO {
     /**
      * 角色id
      */
-    private Integer roleId;
+    private Integer id;
 
     /**
-     * 部门id
+     * 角色名称
      */
-    private Integer deptId;
+    private String name;
+
+    /**
+     * 备注
+     */
+    private String remarks;
+
+    /**
+     * 排序
+     */
+    private Integer sort;
 
     /**
      * 是否删除 1：删除，0：未删除

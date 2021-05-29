@@ -39,3 +39,9 @@ spring:
         reset-enable: true
         login-username: admin
         login-password: 123
+
+mybatis-plus:
+  global-config:
+    db-config:
+      # 表名前缀
+      table-prefix: ax_

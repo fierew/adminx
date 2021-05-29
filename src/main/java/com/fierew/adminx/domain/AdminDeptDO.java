@@ -7,7 +7,7 @@ import lombok.Data;
  * @author xuyang
  */
 @Data
-public class DeptDO {
+public class AdminDeptDO {
     /**
      * 部门id
      */

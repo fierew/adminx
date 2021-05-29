@@ -1,14 +1,12 @@
-package com.fierew.adminx.domain;
-
+package com.fierew.adminx.dto;
 
 import lombok.Data;
 
 /**
- * 用户实体类
  * @author xuyang
  */
 @Data
-public class UserDO {
+public class AdminUserDTO {
     /**
      * 用户ID
      */
@@ -20,14 +18,19 @@ public class UserDO {
     private Integer deptId;
 
     /**
+     * 部门名称
+     */
+    private String deptName;
+
+    /**
      * 角色id
      */
     private Integer roleId;
 
     /**
-     * 密码
+     * 角色名称
      */
-    private String password;
+    private String roleName;
 
     /**
      * 真实姓名
@@ -63,19 +66,4 @@ public class UserDO {
      * 状态
      */
     private Byte state;
-
-    /**
-     * 是否删除 1：删除，0：未删除
-     */
-    private Byte isDelete;
-
-    /**
-     * 写入数据库的时间（10位时间戳）
-     */
-    private Integer createTime;
-
-    /**
-     * 更新数据库的时间（10位时间戳）
-     */
-    private Integer updateTime;
 }

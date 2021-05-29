@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
  */
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Auth {
+public @interface PassAuth {
     boolean required() default true;
 }

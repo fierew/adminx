@@ -1,20 +1,21 @@
 package com.fierew.adminx.service;
 
-import com.fierew.adminx.domain.DeptDO;
+import com.fierew.adminx.domain.AdminDeptDO;
 
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
 
 /**
  * @author xuyang
  */
-public interface DeptService {
+public interface AsyncAdminDeptService {
     /**
      * 根据id获取部门信息
      *
      * @param id id
      * @return 部门信息
      */
-    DeptDO getDeptById(Integer id);
+    CompletableFuture<AdminDeptDO> getDeptById(Integer id);
 
     /**
      * 根据多个id获取部门信息
@@ -22,5 +23,5 @@ public interface DeptService {
      * @param ids ids
      * @return 部门信息列表
      */
-    List<DeptDO> getDeptListByIds(List<Integer> ids);
+    CompletableFuture<List<AdminDeptDO>> getDeptListByIds(List<Integer> ids);
 }
