@@ -27,7 +27,7 @@ public class FastJsonUtils {
         CONFIG.put(java.sql.Timestamp.class, new JSONLibDataFormatSerializer());
     }
 
-    private static final SerializerFeature[] features = {
+    private static final SerializerFeature[] FEATURES = {
             // 输出空置字段
             SerializerFeature.WriteMapNullValue,
             // list字段如果为null，输出为[]，而不是null
@@ -52,13 +52,13 @@ public class FastJsonUtils {
      * @return
      */
     public static String toJsonWithFeatures(Object object) {
-        return JSON.toJSONString(object, CONFIG, features);
+        return JSON.toJSONString(object, CONFIG, FEATURES);
     }
 
     /**
      * 经json转换成字符串，按实际情况
      *
-     * @param object
+     * @param object 对象
      * @return
      */
     public static String toJson(Object object) {
@@ -71,7 +71,7 @@ public class FastJsonUtils {
     /**
      * 将json转成object
      *
-     * @param json
+     * @param json json
      * @return
      */
     public static Object fromJson(String json) {
