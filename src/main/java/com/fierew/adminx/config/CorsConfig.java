@@ -39,7 +39,17 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
         //需要定义一个convert转换消息的对象;
-        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter();
+        FastJsonHttpMessageConverter fastConverter = new FastJsonHttpMessageConverter(){
+            /**
+             * 解决返回json字符串有反斜杠的问题（一般返回对象没有问题，主要解决swaggerDoc返回json）
+             * @param clazz
+             * @return
+             */
+            @Override
+            protected boolean supports(Class<?> clazz) {
+                return clazz != String.class && super.supports(clazz);
+            }
+        };
         //添加fastJson的配置信息;
         FastJsonConfig fastJsonConfig = new FastJsonConfig();
         fastJsonConfig.setSerializerFeatures(SerializerFeature.PrettyFormat);

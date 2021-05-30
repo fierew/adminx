@@ -64,3 +64,12 @@ mybatis-plus:
     db-config:
       # 表名前缀
       table-prefix: ax_
+springdoc:
+  api-docs:
+    groups:
+      enabled: true
+  swagger-ui:
+
+    path: swagger-ui.html
+    display-request-duration: true
+    groups-order: DESC
