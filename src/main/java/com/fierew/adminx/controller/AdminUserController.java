@@ -7,6 +7,7 @@ import com.fierew.adminx.service.AdminUserService;
 import com.fierew.adminx.dto.AdminUserDTO;
 import com.fierew.adminx.dto.TableDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,8 +27,9 @@ public class AdminUserController {
         this.adminUserService = adminUserService;
     }
 
+    @Cacheable(cacheNames = "user")
     @PostMapping("/user")
-    public ResultVO getList(@Validated @RequestBody  TableDTO tableDTO, @Validated AdminUserDTO adminUserDTO) throws ExecutionException, InterruptedException {
+    public ResultVO getList(@Validated @RequestBody TableDTO tableDTO, @Validated AdminUserDTO adminUserDTO) throws ExecutionException, InterruptedException {
         // List<AdminUserVO> userList = adminUserService.getList(tableDTO, adminUserDTO);
         return ResultVO.success(tableDTO);
     }
