@@ -1,4 +1,4 @@
-package com.fierew.adminx.init;
+package com.fierew.adminx.handler;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -17,7 +17,7 @@ import java.sql.*;
 @Component
 @Slf4j
 @WebListener
-public class InitDataBase {
+public class InitSqlHandler {
     @Value(value = "${spring.datasource.username}")
     private String userName;
     @Value(value = "${spring.datasource.password}")

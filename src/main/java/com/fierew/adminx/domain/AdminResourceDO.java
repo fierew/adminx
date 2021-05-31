@@ -1,6 +1,10 @@
 package com.fierew.adminx.domain;
 
+import com.baomidou.mybatisplus.annotation.FieldFill;
+import com.baomidou.mybatisplus.annotation.TableField;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 /**
  * 资源实体类
@@ -69,12 +73,14 @@ public class AdminResourceDO {
     private Byte isDelete;
 
     /**
-     * 写入数据库的时间（10位时间戳）
+     * 写入数据库的时间
      */
-    private Integer createTime;
+    @TableField(fill = FieldFill.INSERT)
+    private LocalDateTime createTime;
 
     /**
-     * 更新数据库的时间（10位时间戳）
+     * 更新数据库的时间
      */
-    private Integer updateTime;
+    @TableField(fill = FieldFill.INSERT_UPDATE)
+    private LocalDateTime updateTime;
 }

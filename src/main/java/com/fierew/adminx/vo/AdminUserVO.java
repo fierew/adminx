@@ -1,18 +1,26 @@
-package com.fierew.adminx.dto;
+package com.fierew.adminx.vo;
 
 import lombok.Data;
-
-import javax.validation.constraints.Email;
 
 /**
  * @author xuyang
  */
 @Data
-public class AdminUserDTO {
+public class AdminUserVO {
+    /**
+     * 用户ID
+     */
+    private Integer id;
+
     /**
      * 部门id
      */
     private Integer deptId;
+
+    /**
+     * 部门名称
+     */
+    private String deptName;
 
     /**
      * 角色id
@@ -20,9 +28,9 @@ public class AdminUserDTO {
     private Integer roleId;
 
     /**
-     * 用户名
+     * 角色名称
      */
-    private String username;
+    private String roleName;
 
     /**
      * 真实姓名
@@ -30,9 +38,8 @@ public class AdminUserDTO {
     private String realName;
 
     /**
-     * 邮箱
+     * 油箱
      */
-    @Email
     private String email;
 
     /**

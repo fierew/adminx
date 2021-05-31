@@ -7,10 +7,12 @@ import com.fierew.adminx.dao.AdminUserDAO;
 import com.fierew.adminx.domain.AdminDeptDO;
 import com.fierew.adminx.domain.AdminRoleDO;
 import com.fierew.adminx.domain.AdminUserDO;
-import com.fierew.adminx.dto.AdminUserDTO;
+import com.fierew.adminx.vo.AdminUserVO;
 import com.fierew.adminx.service.AsyncAdminDeptService;
 import com.fierew.adminx.service.AsyncAdminRoleService;
 import com.fierew.adminx.service.AdminUserService;
+import com.fierew.adminx.dto.AdminUserDTO;
+import com.fierew.adminx.dto.TableDTO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -46,13 +48,14 @@ public class AdminUserServiceImpl implements AdminUserService {
     }
 
     @Override
-    public List<AdminUserDTO> getList(Integer page, Integer pageSize) throws ExecutionException, InterruptedException {
+    public List<AdminUserVO> getList(TableDTO tableDTO, AdminUserDTO adminUserDTO) throws ExecutionException, InterruptedException {
         // 条件构造器
         QueryWrapper<AdminUserDO> userQueryWrapper = new QueryWrapper<>();
         // 模糊查询Like
-        //userQueryWrapper.like("real_name", userDO.getRealName());
+        userQueryWrapper.like("real_name", adminUserDTO.getRealName());
+
         // 分页插件
-        IPage<AdminUserDO> userPage = new Page<>(page, pageSize);
+        IPage<AdminUserDO> userPage = new Page<>(tableDTO.getPage(), tableDTO.getPageSize());
         userPage = adminUserDAO.selectPage(userPage, userQueryWrapper);
         List<AdminUserDO> list = userPage.getRecords();
 
@@ -69,12 +72,12 @@ public class AdminUserServiceImpl implements AdminUserService {
         List<AdminRoleDO> roleList = asyncRoleList.get();
         List<AdminDeptDO> deptList = asyncDeptList.get();
 
-        List<AdminUserDTO> userDTOList = new ArrayList<>();
+        List<AdminUserVO> userDTOList = new ArrayList<>();
         for (AdminUserDO userDO : list) {
             Integer roleId = userDO.getRoleId();
             Integer deptId = userDO.getDeptId();
 
-            AdminUserDTO userDTO = new AdminUserDTO();
+            AdminUserVO userDTO = new AdminUserVO();
             BeanUtils.copyProperties(userDO, userDTO);
             for (AdminRoleDO role: roleList) {
                 if(roleId.equals(role.getId())){
