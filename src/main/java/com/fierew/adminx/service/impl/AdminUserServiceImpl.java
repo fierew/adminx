@@ -96,4 +96,11 @@ public class AdminUserServiceImpl implements AdminUserService {
 
         return userDTOList;
     }
+
+    @Override
+    public Integer add(AdminUserDO adminUserDO) {
+        return adminUserDAO.insert(adminUserDO);
+    }
+
+
 }

@@ -1,5 +1,6 @@
 package com.fierew.adminx.controller;
 
+import com.fierew.adminx.domain.AdminUserDO;
 import com.fierew.adminx.utils.RedisUtils;
 import com.fierew.adminx.vo.ResultVO;
 import com.fierew.adminx.vo.AdminUserVO;
@@ -28,9 +29,17 @@ public class AdminUserController {
     }
 
     @Cacheable(cacheNames = "user")
-    @PostMapping("/user")
-    public ResultVO getList(@Validated @RequestBody TableDTO tableDTO, @Validated AdminUserDTO adminUserDTO) throws ExecutionException, InterruptedException {
-        // List<AdminUserVO> userList = adminUserService.getList(tableDTO, adminUserDTO);
-        return ResultVO.success(tableDTO);
+    @GetMapping("/user")
+    public ResultVO getList(@Validated TableDTO tableDTO, @Validated AdminUserDTO adminUserDTO) throws ExecutionException, InterruptedException {
+        List<AdminUserVO> userList = adminUserService.getList(tableDTO, adminUserDTO);
+        return ResultVO.success(userList);
+    }
+
+    ResultVO addUser(@Validated @RequestBody AdminUserDO adminUserDO){
+        Integer affectRows = adminUserService.add(adminUserDO);
+        if(affectRows > 0){
+            return ResultVO.success();
+        }
+        return ResultVO.error(400, "添加用户失败");
     }
 }

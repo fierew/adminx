@@ -1,4 +1,4 @@
-# adminx Spring Boot 多模块后台管理系统服务端
+# adminx Spring Boot 后台管理系统服务端
 
 ## 入门
 
