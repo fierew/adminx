@@ -11,7 +11,7 @@ CREATE TABLE IF NOT EXISTS `ax_admin_user` (
     `age` int NOT NULL DEFAULT '0' COMMENT '年龄',
     `loginNum` int NOT NULL DEFAULT '0' COMMENT '登陆次数',
     `state` tinyint(1) NOT NULL DEFAULT '0' COMMENT '状态：0.启用，1.禁用',
-    `is_delete` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除：0.未删除，1.已删除',
+    `is_deleted` tinyint(1) NOT NULL DEFAULT '0' COMMENT '是否删除：0.未删除，1.已删除',
     `create_time` datetime NOT NULL COMMENT '创建时间戳',
     `update_time` datetime NOT NULL COMMENT '更新时间戳',
     PRIMARY KEY (`id`),

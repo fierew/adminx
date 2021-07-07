@@ -35,7 +35,7 @@ public class AdminRoleDO {
     /**
      * 是否删除 1：删除，0：未删除
      */
-    private Byte isDelete;
+    private Byte isDeleted;
 
     /**
      * 写入数据库的时间
