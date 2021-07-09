@@ -17,7 +17,7 @@ import java.sql.*;
 @Component
 @Slf4j
 @WebListener
-public class InitSqlHandler {
+public class InitMySqlHandler {
     @Value(value = "${spring.datasource.username}")
     private String userName;
     @Value(value = "${spring.datasource.password}")
