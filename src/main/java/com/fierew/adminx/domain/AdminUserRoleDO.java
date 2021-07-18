@@ -7,40 +7,26 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
- * 部门实体类
+ * 用户与角色关联关系实体类
+ *
  * @author xuyang
  */
 @Data
-public class AdminDeptDO {
+public class AdminUserRoleDO {
     /**
-     * 部门id
+     * 主键ID
      */
     private Integer id;
 
     /**
-     * 部门父级id
+     * 用户id
      */
-    private Integer parentId;
+    private Integer userId;
 
     /**
-     * 部门名称
+     * 角色id
      */
-    private String name;
-
-    /**
-     * 每个层级的关系
-     */
-    private String nodePath;
-
-    /**
-     * 备注
-     */
-    private String remarks;
-
-    /**
-     * 排序
-     */
-    private Integer sort;
+    private Integer roleId;
 
     /**
      * 是否删除 1：删除，0：未删除

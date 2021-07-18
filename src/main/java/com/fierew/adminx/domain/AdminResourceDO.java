@@ -28,12 +28,17 @@ public class AdminResourceDO {
     private String name;
 
     /**
+     * 每个层级的关系
+     */
+    private String nodePath;
+
+    /**
      * 图标
      */
     private String icon;
 
     /**
-     * 类型 1：菜单，2：按钮
+     * 类型 1：菜单，2：按钮, 3:api
      */
     private Integer type;
 
@@ -43,12 +48,7 @@ public class AdminResourceDO {
     private String key;
 
     /**
-     * 路径
-     */
-    private String path;
-
-    /**
-     * 是否隐藏 1：隐藏，0：显示
+     * 菜单或按钮是否隐藏 1：隐藏，0：显示
      */
     private Byte isHide;
 

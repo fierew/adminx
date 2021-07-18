@@ -7,57 +7,60 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 /**
- * 配置实体类
+ * 日志实体类
  * @author xuyang
  */
 @Data
-public class AdminConfigDO {
+public class AdminLogDO {
     /**
-     * 配置id
+     * 主键ID
      */
     private Integer id;
 
     /**
-     * 名称
+     * 用户id
      */
-    private String name;
+    private Integer userId;
 
     /**
-     * [input]单行文本
-     * [textarea]多行文本
-     * [array]数组
-     * [switch]开关
-     * [radio]单选按钮
-     * [checkbox]多选框
-     * [tags]标签
-     * [select]下拉框
-     * [image]图片
-     * [file]文件
-     * [date]日期
-     * [datetime]日期+时间
-     * [time]时间
+     * 请求类型
      */
-    private String type;
+    private String method;
 
     /**
-     * 配置标识
+     * 请求方法
      */
-    private String key;
+    private String function;
 
     /**
-     * 配置值
+     * 请求网址
      */
-    private String value;
+    private String url;
 
     /**
-     * 配置选项
+     * 请求参数
      */
-    private String option;
+    private String param;
 
     /**
-     * 备注
+     * IP
      */
-    private String remarks;
+    private String ip;
+
+    /**
+     * 位置地址
+     */
+    private String location;
+
+    /**
+     * 浏览器
+     */
+    private String browser;
+
+    /**
+     * 耗时
+     */
+    private Integer takeTime;
 
     /**
      * 是否删除 1：删除，0：未删除
