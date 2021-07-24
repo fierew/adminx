@@ -24,11 +24,6 @@ public class AdminUserDO {
     private Integer deptId;
 
     /**
-     * 角色id
-     */
-    private Integer roleId;
-
-    /**
      * 用户名
      */
     private String username;

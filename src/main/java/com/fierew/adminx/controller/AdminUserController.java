@@ -1,7 +1,9 @@
 package com.fierew.adminx.controller;
 
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.fierew.adminx.domain.AdminUserDO;
 import com.fierew.adminx.utils.RedisUtils;
+import com.fierew.adminx.vo.PageVO;
 import com.fierew.adminx.vo.ResultVO;
 import com.fierew.adminx.vo.AdminUserVO;
 import com.fierew.adminx.service.AdminUserService;
@@ -28,18 +30,30 @@ public class AdminUserController {
         this.adminUserService = adminUserService;
     }
 
-    @Cacheable(cacheNames = "user")
+    //    @Cacheable(cacheNames = "user")
     @GetMapping("/user")
     public ResultVO getList(@Validated TableDTO tableDTO, @Validated AdminUserDTO adminUserDTO) throws ExecutionException, InterruptedException {
-        List<AdminUserVO> userList = adminUserService.getList(tableDTO, adminUserDTO);
+        PageVO<AdminUserVO> userList = adminUserService.getList(tableDTO, adminUserDTO);
         return ResultVO.success(userList);
     }
 
-    ResultVO addUser(@Validated @RequestBody AdminUserDO adminUserDO){
-        Integer affectRows = adminUserService.add(adminUserDO);
-        if(affectRows > 0){
+    @PostMapping("/user")
+    ResultVO addUser(@Validated @RequestBody AdminUserDTO adminUserDTO) {
+        Integer affectRows = adminUserService.add(adminUserDTO);
+        if (affectRows > 0) {
             return ResultVO.success();
         }
         return ResultVO.error(400, "添加用户失败");
     }
+
+    @DeleteMapping("/user/{id}")
+    ResultVO delUser(@PathVariable Integer id) {
+        Integer affectRows = adminUserService.del(id);
+        if (affectRows > 0) {
+            return ResultVO.success();
+        }
+        return ResultVO.error(400, "删除用户失败");
+    }
+
+
 }

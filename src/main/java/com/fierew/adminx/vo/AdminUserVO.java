@@ -2,6 +2,9 @@ package com.fierew.adminx.vo;
 
 import lombok.Data;
 
+import java.time.LocalDateTime;
+import java.util.List;
+
 /**
  * @author xuyang
  */
@@ -18,19 +21,9 @@ public class AdminUserVO {
     private Integer deptId;
 
     /**
-     * 部门名称
+     * 所有角色
      */
-    private String deptName;
-
-    /**
-     * 角色id
-     */
-    private Integer roleId;
-
-    /**
-     * 角色名称
-     */
-    private String roleName;
+    private List<AdminRoleVO> roles;
 
     /**
      * 真实姓名
@@ -66,4 +59,14 @@ public class AdminUserVO {
      * 状态
      */
     private Byte state;
+
+    /**
+     * 写入数据库的时间
+     */
+    private LocalDateTime createTime;
+
+    /**
+     * 更新数据库的时间
+     */
+    private LocalDateTime updateTime;
 }

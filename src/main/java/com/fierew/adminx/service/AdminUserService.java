@@ -4,8 +4,8 @@ import com.fierew.adminx.domain.AdminUserDO;
 import com.fierew.adminx.vo.AdminUserVO;
 import com.fierew.adminx.dto.AdminUserDTO;
 import com.fierew.adminx.dto.TableDTO;
+import com.fierew.adminx.vo.PageVO;
 
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**
@@ -18,16 +18,31 @@ public interface AdminUserService {
      * @param tableDTO     列表参数
      * @param adminUserDTO 条件
      * @return 分页列表
-     * @throws InterruptedException
-     * @throws ExecutionException
      */
-    List<AdminUserVO> getList(TableDTO tableDTO, AdminUserDTO adminUserDTO) throws InterruptedException, ExecutionException;
+    PageVO<AdminUserVO> getList(TableDTO tableDTO, AdminUserDTO adminUserDTO) throws InterruptedException, ExecutionException;
 
     /**
      * 新增用户
      *
-     * @param adminUserDO 用户数据
+     * @param adminUserDTO 用户数据
      * @return 结果
      */
-    Integer add(AdminUserDO adminUserDO);
+    Integer add(AdminUserDTO adminUserDTO);
+
+    /**
+     * 删除用户
+     *
+     * @param id 用户id
+     * @return 结果
+     */
+    Integer del(Integer id);
+
+    /**
+     * 修改用户
+     *
+     * @param id 用户id
+     * @param adminUserDTO 用户数据
+     * @return 结果
+     */
+    Integer modify(Integer id, AdminUserDTO adminUserDTO);
 }
