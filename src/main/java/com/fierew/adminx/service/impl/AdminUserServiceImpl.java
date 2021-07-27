@@ -79,16 +79,16 @@ public class AdminUserServiceImpl implements AdminUserService {
         List<AdminRoleDO> adminRoleDOList = adminRoleDAO.selectBatchIds(roleIdList);
 
         // 组合用户id和角色信息
-        List<AdminRoleVO> AdminRoleVOList = new ArrayList<>();
+        List<AdminRoleVO> adminRoleVOList = new ArrayList<>();
         for (AdminUserRoleDO adminUserRole : adminUserRoleDOList) {
 
-            for (AdminRoleDO adminRole : adminRoleDOList) {
-                if (adminUserRole.getRoleId().equals(adminRole.getId())) {
+            for (AdminRoleDO adminRoleDO : adminRoleDOList) {
+                if (adminUserRole.getRoleId().equals(adminRoleDO.getId())) {
                     AdminRoleVO adminRoleVO = new AdminRoleVO();
-                    BeanUtils.copyProperties(adminRole, adminRoleVO);
+                    BeanUtils.copyProperties(adminRoleDO, adminRoleVO);
                     adminRoleVO.setUserId(adminUserRole.getUserId());
 
-                    AdminRoleVOList.add(adminRoleVO);
+                    adminRoleVOList.add(adminRoleVO);
                     break;
                 }
             }
@@ -97,10 +97,10 @@ public class AdminUserServiceImpl implements AdminUserService {
         List<AdminUserVO> adminUserList = new ArrayList<>();
         for (AdminUserDO user : userList) {
             AdminUserVO adminUserVO = new AdminUserVO();
-            List<AdminRoleVO> adminRoleVOS = new ArrayList<>();
             BeanUtils.copyProperties(user, adminUserVO);
 
-            for (AdminRoleVO adminRoleVO : AdminRoleVOList) {
+            List<AdminRoleVO> adminRoleVOS = new ArrayList<>();
+            for (AdminRoleVO adminRoleVO : adminRoleVOList) {
                 if (adminRoleVO.getUserId().equals(user.getId())) {
                     adminRoleVOS.add(adminRoleVO);
                 }
@@ -155,8 +155,8 @@ public class AdminUserServiceImpl implements AdminUserService {
         addUserRole(id, adminUserDTO.getRoleIds());
 
         AdminUserDO adminUserDO = new AdminUserDO();
-        adminUserDO.setId(id);
         BeanUtils.copyProperties(adminUserDTO, adminUserDO);
+        adminUserDO.setId(id);
         return adminUserDAO.updateById(adminUserDO);
     }
 

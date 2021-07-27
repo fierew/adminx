@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
+import java.time.LocalDateTime;
 
 /**
  * @author xuyang
@@ -64,4 +65,10 @@ public class AdminUserDTO {
      */
     @JsonProperty(value = "state")
     private Byte state;
+
+    /**
+     * 写入数据库的时间
+     */
+    @JsonProperty(value = "createTime")
+    private LocalDateTime createTime;
 }
