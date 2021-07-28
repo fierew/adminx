@@ -169,13 +169,17 @@ public class AdminUserServiceImpl implements AdminUserService {
         adminUserRoleDAO.update(adminUserRoleDO, updateWrapper);
     }
 
-    private void addUserRole(Integer userId, String roleIds){
+    private void addUserRole(Integer userId, String roleIds) {
         String[] roleArray = roleIds.split(",");
+
+        List<AdminUserRoleDO> adminUserRoleDOList = new ArrayList<>();
         Arrays.stream(roleArray).map(Integer::parseInt).forEach(item -> {
             AdminUserRoleDO adminUserRoleDO = new AdminUserRoleDO();
             adminUserRoleDO.setUserId(userId);
             adminUserRoleDO.setRoleId(item);
-            adminUserRoleDAO.insert(adminUserRoleDO);
+
+            adminUserRoleDOList.add(adminUserRoleDO);
         });
+        adminUserRoleDAO.insertBatchSomeColumn(adminUserRoleDOList);
     }
 }

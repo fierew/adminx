@@ -8,5 +8,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @author xuyang
  */
 @Mapper
-public interface AdminLogDAO extends BaseMapper<AdminLogDO> {
+public interface AdminLogDAO extends MyBaseMapper<AdminLogDO> {
 }

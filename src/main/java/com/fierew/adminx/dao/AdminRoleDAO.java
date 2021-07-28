@@ -8,5 +8,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @author xuyang
  */
 @Mapper
-public interface AdminRoleDAO extends BaseMapper<AdminRoleDO> {
+public interface AdminRoleDAO extends MyBaseMapper<AdminRoleDO> {
 }

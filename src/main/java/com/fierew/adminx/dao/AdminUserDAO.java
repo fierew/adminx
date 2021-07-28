@@ -8,5 +8,5 @@ import org.apache.ibatis.annotations.Mapper;
  * @author xuyang
  */
 @Mapper
-public interface AdminUserDAO extends BaseMapper<AdminUserDO> {
+public interface AdminUserDAO extends MyBaseMapper<AdminUserDO> {
 }

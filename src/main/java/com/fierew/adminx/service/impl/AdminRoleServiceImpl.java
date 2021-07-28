@@ -107,14 +107,17 @@ public class AdminRoleServiceImpl implements AdminRoleService {
         delRoleResource(adminRoleResourceDTO.getRoleId());
 
         String[] resources = adminRoleResourceDTO.getResourceIds().split(",");
+
+        List<AdminRoleResourceDO> adminRoleResourceDOList = new ArrayList<>();
         for (String resource : resources) {
             AdminRoleResourceDO adminRoleResourceDO = new AdminRoleResourceDO();
             adminRoleResourceDO.setRoleId(adminRoleResourceDTO.getRoleId());
             adminRoleResourceDO.setResourceId(Integer.parseInt(resource));
 
-            adminRoleResourceDAO.insert(adminRoleResourceDO);
+            adminRoleResourceDOList.add(adminRoleResourceDO);
         }
-        return 1;
+
+        return adminRoleResourceDAO.insertBatchSomeColumn(adminRoleResourceDOList);
     }
 
     protected void delRoleResource(Integer roleId) {
