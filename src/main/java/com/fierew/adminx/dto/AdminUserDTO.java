@@ -67,8 +67,14 @@ public class AdminUserDTO {
     private Byte state;
 
     /**
-     * 写入数据库的时间
+     * 开始时间
      */
-    @JsonProperty(value = "createTime")
-    private LocalDateTime createTime;
+    @JsonProperty(value = "startTime")
+    private LocalDateTime startTime;
+
+    /**
+     * 开始时间
+     */
+    @JsonProperty(value = "endTime")
+    private LocalDateTime endTime;
 }

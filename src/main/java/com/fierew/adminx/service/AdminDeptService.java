@@ -1,6 +1,7 @@
 package com.fierew.adminx.service;
 
-import com.fierew.adminx.domain.AdminDeptDO;
+import com.fierew.adminx.dto.AdminDeptDTO;
+import com.fierew.adminx.vo.AdminDeptVO;
 
 import java.util.List;
 
@@ -8,19 +9,5 @@ import java.util.List;
  * @author xuyang
  */
 public interface AdminDeptService {
-    /**
-     * 根据id获取部门信息
-     *
-     * @param id id
-     * @return 部门信息
-     */
-    AdminDeptDO getDeptById(Integer id);
-
-    /**
-     * 根据多个id获取部门信息
-     *
-     * @param ids ids
-     * @return 部门信息列表
-     */
-    List<AdminDeptDO> getDeptListByIds(List<Integer> ids);
+    List<AdminDeptVO> getTreeDept(AdminDeptDTO adminDeptDTO);
 }

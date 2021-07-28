@@ -1,8 +1,5 @@
 package com.fierew.adminx.controller;
 
-import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.fierew.adminx.domain.AdminUserDO;
-import com.fierew.adminx.utils.RedisUtils;
 import com.fierew.adminx.vo.PageVO;
 import com.fierew.adminx.vo.ResultVO;
 import com.fierew.adminx.vo.AdminUserVO;
@@ -10,11 +7,9 @@ import com.fierew.adminx.service.AdminUserService;
 import com.fierew.adminx.dto.AdminUserDTO;
 import com.fierew.adminx.dto.TableDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 /**

@@ -31,7 +31,7 @@ public class AdminRoleServiceImpl implements AdminRoleService {
     private AdminRoleResourceDAO adminRoleResourceDAO;
 
     @Autowired
-    public void setAdminRoleDAO(AdminRoleDAO adminRoleDAO, AdminRoleResourceDAO adminRoleResourceDAO) {
+    public void setDAO(AdminRoleDAO adminRoleDAO, AdminRoleResourceDAO adminRoleResourceDAO) {
         this.adminRoleDAO = adminRoleDAO;
         this.adminRoleResourceDAO = adminRoleResourceDAO;
     }
