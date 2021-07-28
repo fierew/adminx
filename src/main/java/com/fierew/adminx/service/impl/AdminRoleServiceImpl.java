@@ -1,6 +1,7 @@
 package com.fierew.adminx.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.fierew.adminx.dao.AdminRoleDAO;
@@ -8,6 +9,7 @@ import com.fierew.adminx.dao.AdminRoleResourceDAO;
 import com.fierew.adminx.domain.AdminRoleDO;
 import com.fierew.adminx.domain.AdminRoleResourceDO;
 import com.fierew.adminx.dto.AdminRoleDTO;
+import com.fierew.adminx.dto.AdminRoleResourceDTO;
 import com.fierew.adminx.dto.TableDTO;
 import com.fierew.adminx.service.AdminRoleService;
 import com.fierew.adminx.vo.AdminRoleVO;
@@ -15,6 +17,7 @@ import com.fierew.adminx.vo.PageVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,13 +31,13 @@ public class AdminRoleServiceImpl implements AdminRoleService {
     private AdminRoleResourceDAO adminRoleResourceDAO;
 
     @Autowired
-    public void setAdminRoleDAO (AdminRoleDAO adminRoleDAO, AdminRoleResourceDAO adminRoleResourceDAO){
+    public void setAdminRoleDAO(AdminRoleDAO adminRoleDAO, AdminRoleResourceDAO adminRoleResourceDAO) {
         this.adminRoleDAO = adminRoleDAO;
         this.adminRoleResourceDAO = adminRoleResourceDAO;
     }
 
     @Override
-    public PageVO<AdminRoleVO> getList(TableDTO tableDTO, AdminRoleDTO adminRoleDTO){
+    public PageVO<AdminRoleVO> getList(TableDTO tableDTO, AdminRoleDTO adminRoleDTO) {
         // 条件构造器
         QueryWrapper<AdminRoleDO> roleQueryWrapper = new QueryWrapper<>();
 
@@ -55,7 +58,7 @@ public class AdminRoleServiceImpl implements AdminRoleService {
 
         List<AdminRoleVO> adminRoleVOList = new ArrayList<>();
 
-        for (AdminRoleDO role: roleList) {
+        for (AdminRoleDO role : roleList) {
             AdminRoleVO adminRoleVO = new AdminRoleVO();
             BeanUtils.copyProperties(role, adminRoleVO);
 
@@ -70,7 +73,7 @@ public class AdminRoleServiceImpl implements AdminRoleService {
     }
 
     @Override
-    public Integer add(AdminRoleDTO adminRoleDTO){
+    public Integer add(AdminRoleDTO adminRoleDTO) {
         AdminRoleDO adminRoleDO = new AdminRoleDO();
         BeanUtils.copyProperties(adminRoleDTO, adminRoleDO);
 
@@ -78,7 +81,7 @@ public class AdminRoleServiceImpl implements AdminRoleService {
     }
 
     @Override
-    public Integer modify(Integer id, AdminRoleDTO adminRoleDTO){
+    public Integer modify(Integer id, AdminRoleDTO adminRoleDTO) {
         AdminRoleDO adminRoleDO = new AdminRoleDO();
         BeanUtils.copyProperties(adminRoleDTO, adminRoleDO);
         adminRoleDO.setId(id);
@@ -86,12 +89,10 @@ public class AdminRoleServiceImpl implements AdminRoleService {
     }
 
     @Override
-    public Integer del(Integer id){
+    @Transactional
+    public Integer del(Integer id) {
         // 删除角色与菜单的关联信息
-        AdminRoleResourceDO adminRoleResourceDO = new AdminRoleResourceDO();
-        adminRoleResourceDO.setRoleId(id);
-        adminRoleResourceDO.setIsDeleted((byte) 1);
-        adminRoleResourceDAO.updateById(adminRoleResourceDO);
+        delRoleResource(id);
 
         AdminRoleDO adminRoleDO = new AdminRoleDO();
         adminRoleDO.setId(id);
@@ -100,12 +101,27 @@ public class AdminRoleServiceImpl implements AdminRoleService {
     }
 
     @Override
-    public AdminRoleDO getRoleById(Integer id) {
-        return adminRoleDAO.selectById(id);
+    @Transactional
+    public Integer addRoleResource(AdminRoleResourceDTO adminRoleResourceDTO) {
+        // 删除角色与菜单的关联信息
+        delRoleResource(adminRoleResourceDTO.getRoleId());
+
+        String[] resources = adminRoleResourceDTO.getResourceIds().split(",");
+        for (String resource : resources) {
+            AdminRoleResourceDO adminRoleResourceDO = new AdminRoleResourceDO();
+            adminRoleResourceDO.setRoleId(adminRoleResourceDTO.getRoleId());
+            adminRoleResourceDO.setResourceId(Integer.parseInt(resource));
+
+            adminRoleResourceDAO.insert(adminRoleResourceDO);
+        }
+        return 1;
     }
 
-    @Override
-    public List<AdminRoleDO> getRoleListByIds(List<Integer> ids) {
-        return adminRoleDAO.selectBatchIds(ids);
+    protected void delRoleResource(Integer roleId) {
+        AdminRoleResourceDO adminRoleResourceDO = new AdminRoleResourceDO();
+        adminRoleResourceDO.setIsDeleted((byte) 1);
+        UpdateWrapper<AdminRoleResourceDO> updateWrapper = new UpdateWrapper<>();
+        updateWrapper.eq("role_id", roleId);
+        adminRoleResourceDAO.update(adminRoleResourceDO, updateWrapper);
     }
 }

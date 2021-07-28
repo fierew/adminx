@@ -2,6 +2,7 @@ package com.fierew.adminx.service;
 
 import com.fierew.adminx.domain.AdminRoleDO;
 import com.fierew.adminx.dto.AdminRoleDTO;
+import com.fierew.adminx.dto.AdminRoleResourceDTO;
 import com.fierew.adminx.dto.AdminUserDTO;
 import com.fierew.adminx.dto.TableDTO;
 import com.fierew.adminx.vo.AdminRoleVO;
@@ -48,18 +49,10 @@ public interface AdminRoleService {
     Integer del(Integer id);
 
     /**
-     * 根据id获取角色信息
+     * 添加角色资源
      *
-     * @param id id
-     * @return 角色信息
+     * @param adminRoleResourceDTO 角色ID和多个资源id
+     * @return 结果
      */
-    AdminRoleDO getRoleById(Integer id);
-
-    /**
-     * 根据多个id获取角色信息
-     *
-     * @param ids ids
-     * @return 角色信息列表
-     */
-    List<AdminRoleDO> getRoleListByIds(List<Integer> ids);
+    Integer addRoleResource(AdminRoleResourceDTO adminRoleResourceDTO);
 }
