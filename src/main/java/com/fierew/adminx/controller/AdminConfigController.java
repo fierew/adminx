@@ -17,13 +17,13 @@ public class AdminConfigController {
         return ResultVO.success();
     }
 
-    @PutMapping("/config")
-    ResultVO modify() {
+    @PutMapping("/config/{id}")
+    ResultVO modify(@PathVariable Integer id) {
         return ResultVO.success();
     }
 
-    @DeleteMapping("/config")
-    ResultVO delete() {
+    @DeleteMapping("/config/{id}")
+    ResultVO delete(@PathVariable Integer id) {
         return ResultVO.success();
     }
 }

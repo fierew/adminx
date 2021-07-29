@@ -19,7 +19,7 @@ public interface AdminUserService {
      * @param adminUserDTO 条件
      * @return 分页列表
      */
-    PageVO<AdminUserVO> getList(TableDTO tableDTO, AdminUserDTO adminUserDTO) throws InterruptedException, ExecutionException;
+    PageVO<AdminUserVO> getList(TableDTO tableDTO, AdminUserDTO adminUserDTO);
 
     /**
      * 新增用户

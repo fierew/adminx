@@ -10,4 +10,10 @@ import java.util.List;
  */
 public interface AdminDeptService {
     List<AdminDeptVO> getTreeDept(AdminDeptDTO adminDeptDTO);
+
+    Integer add(AdminDeptDTO adminDeptDTO);
+
+    Integer modify(Integer id, AdminDeptDTO adminDeptDTO);
+
+    Integer del(Integer id);
 }

@@ -27,28 +27,35 @@ public class AdminUserController {
 
     //    @Cacheable(cacheNames = "user")
     @GetMapping("/user")
-    public ResultVO getList(@Validated TableDTO tableDTO, @Validated AdminUserDTO adminUserDTO) throws ExecutionException, InterruptedException {
+    public ResultVO getList(@Validated TableDTO tableDTO, @Validated AdminUserDTO adminUserDTO) {
         PageVO<AdminUserVO> userList = adminUserService.getList(tableDTO, adminUserDTO);
         return ResultVO.success(userList);
     }
 
     @PostMapping("/user")
-    ResultVO addUser(@Validated @RequestBody AdminUserDTO adminUserDTO) {
-        Integer affectRows = adminUserService.add(adminUserDTO);
-        if (affectRows > 0) {
-            return ResultVO.success();
+    ResultVO add(@Validated @RequestBody AdminUserDTO adminUserDTO) {
+        Integer result = adminUserService.add(adminUserDTO);
+        if (result != 0) {
+            return ResultVO.error(500, "新增用户失败");
         }
-        return ResultVO.error(400, "添加用户失败");
+        return ResultVO.success();
+    }
+
+    @PutMapping("/user/{id}")
+    ResultVO modify(@PathVariable Integer id, @Validated @RequestBody AdminUserDTO adminUserDTO) {
+        Integer result = adminUserService.modify(id, adminUserDTO);
+        if (result != 0) {
+            return ResultVO.error(500, "修改用户失败");
+        }
+        return ResultVO.success();
     }
 
     @DeleteMapping("/user/{id}")
-    ResultVO delUser(@PathVariable Integer id) {
-        Integer affectRows = adminUserService.del(id);
-        if (affectRows > 0) {
-            return ResultVO.success();
+    ResultVO del(@PathVariable Integer id) {
+        Integer result = adminUserService.del(id);
+        if (result != 0) {
+            return ResultVO.error(400, "删除用户失败");
         }
-        return ResultVO.error(400, "删除用户失败");
+        return ResultVO.success();
     }
-
-
 }

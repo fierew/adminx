@@ -3,7 +3,6 @@ package com.fierew.adminx.service.impl;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.fierew.adminx.dao.AdminDeptDAO;
 import com.fierew.adminx.domain.AdminDeptDO;
-import com.fierew.adminx.domain.AdminUserDO;
 import com.fierew.adminx.dto.AdminDeptDTO;
 import com.fierew.adminx.service.AdminDeptService;
 import com.fierew.adminx.utils.TreeUtil;
@@ -52,5 +51,30 @@ public class AdminDeptServiceImpl implements AdminDeptService {
                 }).collect(Collectors.toList());
 
         return TreeUtil.bulid(treeList, 0);
+    }
+
+    @Override
+    public Integer add(AdminDeptDTO adminDeptDTO) {
+        AdminDeptDO adminDeptDO = new AdminDeptDO();
+        BeanUtils.copyProperties(adminDeptDTO, adminDeptDO);
+
+        return adminDeptDAO.insert(adminDeptDO);
+    }
+
+    @Override
+    public Integer modify(Integer id, AdminDeptDTO adminDeptDTO) {
+        AdminDeptDO adminDeptDO = new AdminDeptDO();
+        BeanUtils.copyProperties(adminDeptDTO, adminDeptDO);
+        adminDeptDO.setId(id);
+        return adminDeptDAO.updateById(adminDeptDO);
+    }
+
+    @Override
+    public Integer del(Integer id) {
+        AdminDeptDO adminDeptDO = new AdminDeptDO();
+        adminDeptDO.setId(id);
+        adminDeptDO.setIsDeleted((byte) 1);
+
+        return adminDeptDAO.updateById(adminDeptDO);
     }
 }

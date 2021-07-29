@@ -48,4 +48,30 @@ public class AdminResourceServiceImpl implements AdminResourceService {
 
         return TreeUtil.bulid(treeList, 0);
     }
+
+    @Override
+    public Integer add(AdminResourceDTO adminResourceDTO) {
+        AdminResourceDO adminResourceDO = new AdminResourceDO();
+        BeanUtils.copyProperties(adminResourceDTO, adminResourceDO);
+
+        return adminResourceDAO.insert(adminResourceDO);
+    }
+
+    @Override
+    public Integer modify(Integer id, AdminResourceDTO adminResourceDTO) {
+        AdminResourceDO adminResourceDO = new AdminResourceDO();
+        BeanUtils.copyProperties(adminResourceDTO, adminResourceDO);
+        adminResourceDO.setId(id);
+
+        return adminResourceDAO.updateById(adminResourceDO);
+    }
+
+    @Override
+    public Integer del(Integer id) {
+        AdminResourceDO adminResourceDO = new AdminResourceDO();
+        adminResourceDO.setId(id);
+        adminResourceDO.setIsDeleted((byte) 1);
+
+        return adminResourceDAO.updateById(adminResourceDO);
+    }
 }
