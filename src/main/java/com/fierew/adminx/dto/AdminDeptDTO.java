@@ -1,45 +1,35 @@
 package com.fierew.adminx.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import java.time.LocalDateTime;
 
 @Data
+@Schema(name = "AdminDept", description = "请求数据，部门实体类")
 public class AdminDeptDTO {
-    /**
-     * 部门父级id
-     */
+    @Schema(description = "部门父级id")
     @JsonProperty(value = "parentId")
     private Integer parentId;
 
-    /**
-     * 部门名称
-     */
+    @Schema(description = "部门名称")
     @JsonProperty(value = "name")
     private String name;
 
-    /**
-     * 每个层级的关系
-     */
+    @Schema(description = "每个层级的关系")
     @JsonProperty(value = "nodePath")
     private String nodePath;
 
-    /**
-     * 备注
-     */
+    @Schema(description = "备注")
     @JsonProperty(value = "remarks")
     private String remarks;
 
-    /**
-     * 开始时间
-     */
+    @Schema(description = "开始时间")
     @JsonProperty(value = "startTime")
     private LocalDateTime startTime;
 
-    /**
-     * 开始时间
-     */
+    @Schema(description = "结束时间")
     @JsonProperty(value = "endTime")
     private LocalDateTime endTime;
 }

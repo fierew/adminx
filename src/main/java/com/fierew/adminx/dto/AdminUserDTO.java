@@ -1,6 +1,7 @@
 package com.fierew.adminx.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
 import javax.validation.constraints.Email;
@@ -10,71 +11,50 @@ import java.time.LocalDateTime;
  * @author xuyang
  */
 @Data
+@Schema(name = "AdminUser", description = "请求数据，用户实体类")
 public class AdminUserDTO {
-    /**
-     * 部门id
-     */
+    @Schema(description = "部门id")
     @JsonProperty(value = "deptId")
     private Integer deptId;
 
-    /**
-     * 多个角色ID
-     */
+    @Schema(description = "多个角色ID")
     @JsonProperty(value = "roleIds")
     private String roleIds;
 
-    /**
-     * 用户名
-     */
+    @Schema(description = "用户名")
     @JsonProperty(value = "username")
     private String username;
 
-    /**
-     * 真实姓名
-     */
+    @Schema(description = "真实姓名")
     @JsonProperty(value = "realName")
     private String realName;
 
-    /**
-     * 邮箱
-     */
+    @Schema(description = "邮箱")
     @Email
     @JsonProperty(value = "email")
     private String email;
 
-    /**
-     * 手机号
-     */
+    @Schema(description = "手机号")
     @JsonProperty(value = "mobile")
     private String mobile;
 
-    /**
-     * 性别
-     */
+    @Schema(description = "性别")
     @JsonProperty(value = "sex")
     private Byte sex;
 
-    /**
-     * 年龄
-     */
+    @Schema(description = "年龄")
     @JsonProperty(value = "age")
     private Integer age;
 
-    /**
-     * 状态
-     */
+    @Schema(description = "状态")
     @JsonProperty(value = "state")
     private Byte state;
 
-    /**
-     * 开始时间
-     */
+    @Schema(description = "开始时间")
     @JsonProperty(value = "startTime")
     private LocalDateTime startTime;
 
-    /**
-     * 开始时间
-     */
+    @Schema(description = "结束时间")
     @JsonProperty(value = "endTime")
     private LocalDateTime endTime;
 }

@@ -1,5 +1,6 @@
 package com.fierew.adminx.controller;
 
+import com.fierew.adminx.api.AdminUserControllerApi;
 import com.fierew.adminx.vo.PageVO;
 import com.fierew.adminx.vo.ResultVO;
 import com.fierew.adminx.vo.AdminUserVO;
@@ -17,7 +18,7 @@ import java.util.concurrent.ExecutionException;
  */
 @RestController
 @RequestMapping("admin")
-public class AdminUserController {
+public class AdminUserController implements AdminUserControllerApi {
     private AdminUserService adminUserService;
 
     @Autowired
@@ -27,13 +28,15 @@ public class AdminUserController {
 
     //    @Cacheable(cacheNames = "user")
     @GetMapping("/user")
+    @Override
     public ResultVO getList(@Validated TableDTO tableDTO, @Validated AdminUserDTO adminUserDTO) {
         PageVO<AdminUserVO> userList = adminUserService.getList(tableDTO, adminUserDTO);
         return ResultVO.success(userList);
     }
 
     @PostMapping("/user")
-    ResultVO add(@Validated @RequestBody AdminUserDTO adminUserDTO) {
+    @Override
+    public ResultVO add(@Validated @RequestBody AdminUserDTO adminUserDTO) {
         Integer result = adminUserService.add(adminUserDTO);
         if (result != 0) {
             return ResultVO.error(500, "新增用户失败");
@@ -42,7 +45,8 @@ public class AdminUserController {
     }
 
     @PutMapping("/user/{id}")
-    ResultVO modify(@PathVariable Integer id, @Validated @RequestBody AdminUserDTO adminUserDTO) {
+    @Override
+    public ResultVO modify(@PathVariable Integer id, @Validated @RequestBody AdminUserDTO adminUserDTO) {
         Integer result = adminUserService.modify(id, adminUserDTO);
         if (result != 0) {
             return ResultVO.error(500, "修改用户失败");
@@ -51,7 +55,8 @@ public class AdminUserController {
     }
 
     @DeleteMapping("/user/{id}")
-    ResultVO del(@PathVariable Integer id) {
+    @Override
+    public ResultVO del(@PathVariable Integer id) {
         Integer result = adminUserService.del(id);
         if (result != 0) {
             return ResultVO.error(400, "删除用户失败");
